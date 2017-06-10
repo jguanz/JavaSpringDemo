@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="parenttriangle" class="Triangle" >
+        <property name="points">
+            <list>
+                <ref bean="zeroPoint" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="triangle1" class="Triangle" parent="parenttriangle">
+        <property name="points">
+            <list merge="true">
+                <ref bean="zeroPoint" />
+                <ref bean="point2" />
+                <ref bean="point3" />
+            </list>
+        </property>
+        <!--<constructor-arg type="java.lang.String" value="20" />-->
+        <!--<constructor-arg value="Equilateral" />-->
+        <!--<constructor-arg value="20" />-->
+        <!--<property name="type" value="Equilateral" />-->
+    </bean>
+    <bean id="zeroPoint" class="Point">
+        <property name="x" value="0" />
+        <property name="y" value="0" />
+    </bean>
+    <bean id="point2" class="Point">
+        <property name="x" value="-20" />
+        <property name="y" value="0" />
+    </bean>
+    <bean id="point3" class="Point">
+        <property name="x" value="0" />
+        <property name="y" value="20" />
+    </bean>
+
+
+</beans>
