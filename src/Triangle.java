@@ -1,5 +1,7 @@
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * Created by jguanz on 6/7/17.
  */
-public class Triangle implements ApplicationContextAware, BeanNameAware{
+public class Triangle implements InitializingBean, DisposableBean{
 
 
     public List<Point> getPoints() {
@@ -18,7 +20,6 @@ public class Triangle implements ApplicationContextAware, BeanNameAware{
     public void setPoints(List<Point> points) {
         this.points = points;
     }
-
 
 
     private List<Point> points;
@@ -31,12 +32,12 @@ public class Triangle implements ApplicationContextAware, BeanNameAware{
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = context;
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("Initializing bean method called for Triangle");
     }
 
     @Override
-    public void setBeanName(String beanName) {
-        System.out.println("Bean name is: " + beanName);
+    public void destroy() throws Exception {
+        System.out.println("Destroy bean method called for Triangle");
     }
 }
